@@ -14,14 +14,15 @@ import serviceImpl.AuthenticateImpl;
 @Controller
 public class loginController {
 	
-//	
-//	@RequestMapping(value="/" , method= RequestMethod.POST)
-//	public String home(){
-//		return "redirect:/login";
-//	}
-//	
+
+
+	@RequestMapping(value="/login" , method= RequestMethod.GET)
+	public String homepage(){
+		return "login";
+	}
 	
-	@RequestMapping(value="/login", method=RequestMethod.POST)
+	
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 public String login(@RequestParam("un") String username, @RequestParam("pw") String pass, Model model){
 		
 		Authenticate a=new AuthenticateImpl();
@@ -30,7 +31,7 @@ public String login(@RequestParam("un") String username, @RequestParam("pw") Str
 		if(a.check(username, pass)){
 		
 			user  u = new user(username,pass);
-			
+			model.addAttribute("user",u);
 			
 			return "welcome";
 			
@@ -39,6 +40,7 @@ public String login(@RequestParam("un") String username, @RequestParam("pw") Str
 		
 		else{
 			
+			model.addAttribute("error", "username or password incorrect");
 			return "login";
 		}	
 		}

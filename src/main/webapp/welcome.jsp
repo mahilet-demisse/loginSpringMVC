@@ -9,7 +9,7 @@
 <body>
 <h1>
 
-Welcome ${user}
+Welcome ${user.getUsername() }
 
 </h1>
  
